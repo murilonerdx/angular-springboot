@@ -47,4 +47,10 @@ public class ClienteController {
         Cliente obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

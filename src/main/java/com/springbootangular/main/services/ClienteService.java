@@ -31,4 +31,8 @@ public class ClienteService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    public void deleteById(Integer id){
+        repository.deleteById(id);
+    }
+
 }

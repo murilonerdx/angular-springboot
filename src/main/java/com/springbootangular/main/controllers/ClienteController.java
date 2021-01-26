@@ -41,4 +41,10 @@ public class ClienteController {
         List<Cliente> obj = service.findAll();
         return ResponseEntity.ok().body(obj);
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Cliente> findById(@PathVariable Integer id) {
+        Cliente obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
+    }
 }

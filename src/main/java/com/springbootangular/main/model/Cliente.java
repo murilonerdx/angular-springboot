@@ -1,4 +1,4 @@
-package com.springbootangular.main.entities;
+package com.springbootangular.main.model;
 
 import lombok.Data;
 

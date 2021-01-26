@@ -8,13 +8,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.Instant;
+
 @SpringBootApplication
 public class MainApplication {
 
     @Bean
     public CommandLineRunner run(@Autowired ClienteRepository repository){
         return args ->{
-            Cliente cliente = Cliente.builder().cpf("0000000000").nome("Murilo").build();
+            Cliente cliente = Cliente.builder().cpf("0000000000").nome("Murilo").dataCadastro(Instant.now()).build();
             repository.save(cliente);
         };
     }

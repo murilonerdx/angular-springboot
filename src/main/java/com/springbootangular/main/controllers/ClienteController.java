@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @Controller
@@ -21,15 +25,20 @@ public class ClienteController {
     private final ClienteService service;
 
     @Autowired
-    public ClienteController(ClienteService service){
+    public ClienteController(ClienteService service) {
         this.service = service;
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Cliente> insert(@RequestBody Cliente obj){
+    public ResponseEntity<Cliente> insert(@RequestBody Cliente obj) {
         obj = service.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Cliente>> findAll(){
+        List<Cliente> obj = service.findAll();
+        return ResponseEntity.ok().body(obj);
     }
 }

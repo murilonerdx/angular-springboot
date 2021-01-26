@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
@@ -23,6 +24,6 @@ public class Cliente implements Serializable {
     private String nome;
     @Column(nullable = false, length = 120)
     private String cpf;
-    private LocalDate dataCadastro;
+    private Instant dataCadastro;
 
 }

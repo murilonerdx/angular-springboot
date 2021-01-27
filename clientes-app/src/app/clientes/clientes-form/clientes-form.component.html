@@ -4,7 +4,7 @@
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item active">Cadastro</li>
                             </ol>
-                            <form action="">
+                            <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class class="form-group">
@@ -37,7 +37,7 @@
                                 </div>
                             <div class="row">
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-success" (click)="clicar()">
+                                    <button type="submit" class="btn btn-success">
                                         <i class="fa fa-save"></i> Salvar
                                     </button>
                                 </div>

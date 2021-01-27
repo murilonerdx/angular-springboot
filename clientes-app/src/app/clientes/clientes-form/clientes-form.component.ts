@@ -8,11 +8,17 @@ import {Cliente} from '../clientes'
   styleUrls: ['./clientes-form.component.css']
 })
 export class ClientesFormComponent implements OnInit {
-  cliente: Cliente = new Cliente;
-  
-  constructor() { }
+  cliente: Cliente
+
+  constructor() {
+    this.cliente = new Cliente()
+   }
 
   ngOnInit(): void {
+  }
+
+  clicar(){
+    console.log(this.cliente)
   }
 
 }

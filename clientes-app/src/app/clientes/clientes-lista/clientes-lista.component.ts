@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../clientes';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-clientes-lista',
@@ -9,7 +10,7 @@ import { Cliente } from '../clientes';
 })
 export class ClientesListaComponent implements OnInit {
   clientes: Cliente[] | undefined | null;
-  constructor(private service: ClientesService) {
+  constructor(private service: ClientesService, private router :Router) {
 
    }
 
@@ -18,5 +19,11 @@ export class ClientesListaComponent implements OnInit {
     .getClientes()
     .subscribe(response => this.clientes = response);
   }
+
+  novoCadastro(){
+    this.router.navigate(['/clientes-form'])
+  }
+
+  
 
 }

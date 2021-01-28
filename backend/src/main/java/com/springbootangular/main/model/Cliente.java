@@ -1,10 +1,9 @@
 package com.springbootangular.main.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -12,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
@@ -30,6 +30,9 @@ public class Cliente implements Serializable {
     @NotNull(message = "CPF é obrigatorio.")
     @CPF(message = "CPF está invalido")
     private String cpf;
-    private Instant dataCadastro;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private Date dataCadastro;
+
+
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -29,12 +30,13 @@ public class ClienteController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Cliente> insert(@RequestBody @Valid Cliente obj) {
-        if (obj.getNome() != null) {
+    public ResponseEntity<Cliente> insert(@RequestBody @Valid Cliente obj) throws ParseException {
+        Boolean exists = service.existCpf(obj);
+        if (obj.getNome() != null && obj.getCpf() != null && !exists) {
             obj = service.insert(obj);
             return ResponseEntity.ok().body(obj);
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping()

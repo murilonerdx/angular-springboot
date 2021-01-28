@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +21,10 @@ public class ClienteService {
     private ClienteRepository repository;
 
     public Cliente insert(Cliente obj){
+
+        obj.setCpf(obj.getCpf().replaceAll("[^0-9]+", ""));
         if (obj.getDataCadastro() == null) {
-            obj.setDataCadastro(Instant.now());
+            obj.setDataCadastro(new Date());
         }
         return repository.save(obj);
     }
@@ -48,7 +52,13 @@ public class ClienteService {
     public void updateData(Cliente obj, Cliente entity){
         obj.setNome(entity.getNome());
         obj.setCpf(entity.getCpf());
-        obj.setDataCadastro(Instant.now());
+        obj.setDataCadastro(new Date());
+    }
+
+    public Boolean existCpf(Cliente obj){
+        List<Cliente> novaLista = findAll();
+        boolean exist = novaLista.stream().map(Cliente::getCpf).anyMatch(y-> y.equals(obj.getCpf()));
+        return exist;
     }
 
 }

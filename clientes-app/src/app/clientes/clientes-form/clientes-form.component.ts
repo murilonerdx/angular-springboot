@@ -11,7 +11,7 @@ import {ClientesService} from '../../clientes.service'
 export class ClientesFormComponent implements OnInit {
   cliente: Cliente
   success: boolean = false;
-  errors: String[] | null | undefined;
+  errors!: String[] | null;
 
   constructor(private service: ClientesService) {
     this.cliente = new Cliente();

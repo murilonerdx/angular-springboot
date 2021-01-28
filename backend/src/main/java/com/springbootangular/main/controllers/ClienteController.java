@@ -72,13 +72,8 @@ public class ClienteController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> updateById(@PathVariable @Valid Integer id, @RequestBody Cliente obj) {
         try {
-            Boolean exists = service.existCpfById(obj.getCpf());
-            if(exists){
-                service.updateById(id, obj);
-                return ResponseEntity.noContent().build();
-            }
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF Já existe no banco de dados");
-
+            service.updateById(id, obj);
+            return ResponseEntity.noContent().build();
         } catch (ResponseStatusException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
         }

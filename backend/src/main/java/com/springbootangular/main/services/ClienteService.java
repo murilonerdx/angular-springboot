@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -59,12 +60,7 @@ public class ClienteService {
     public Boolean existCpf(Cliente obj) {
         List<Cliente> novaLista = findAll();
         boolean exist = novaLista.stream().map(Cliente::getCpf).anyMatch(y -> y.equals(obj.getCpf()));
-        return exist;
-    }
-
-    public Boolean existCpfById(String cpf){
-        List<Cliente> novaLista = findAll();
-        boolean exist = novaLista.stream().map(Cliente::getCpf).anyMatch(y -> y.equals(cpf));
+        novaLista.clear();
         return exist;
     }
 

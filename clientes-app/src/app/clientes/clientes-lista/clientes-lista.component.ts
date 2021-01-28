@@ -9,6 +9,7 @@ import {Router} from '@angular/router'
   styleUrls: ['./clientes-lista.component.css']
 })
 export class ClientesListaComponent implements OnInit {
+  clienteSelecionado: Cliente | undefined;
   clientes: Cliente[] | undefined | null;
   constructor(private service: ClientesService, private router :Router) {
 
@@ -22,6 +23,10 @@ export class ClientesListaComponent implements OnInit {
 
   novoCadastro(){
     this.router.navigate(['/clientes-form'])
+  }
+
+  preparaDelecao(cliente : Cliente){
+    this.clienteSelecionado = cliente;
   }
 
   

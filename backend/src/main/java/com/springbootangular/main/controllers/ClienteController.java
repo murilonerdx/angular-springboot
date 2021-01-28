@@ -36,7 +36,7 @@ public class ClienteController {
             obj = service.insert(obj);
             return ResponseEntity.ok().body(obj);
         }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF Já existe no banco de dados");
     }
 
     @GetMapping()
@@ -72,8 +72,13 @@ public class ClienteController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> updateById(@PathVariable @Valid Integer id, @RequestBody Cliente obj) {
         try {
-            service.updateById(id, obj);
-            return ResponseEntity.noContent().build();
+            Boolean exists = service.existCpfById(obj.getCpf());
+            if(exists){
+                service.updateById(id, obj);
+                return ResponseEntity.noContent().build();
+            }
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF Já existe no banco de dados");
+
         } catch (ResponseStatusException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
         }

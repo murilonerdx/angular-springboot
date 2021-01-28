@@ -20,7 +20,7 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
-    public Cliente insert(Cliente obj){
+    public Cliente insert(Cliente obj) {
 
         obj.setCpf(obj.getCpf().replaceAll("[^0-9]+", ""));
         if (obj.getDataCadastro() == null) {
@@ -38,26 +38,33 @@ public class ClienteService {
         return obj.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 
-    public void updateById(Integer id, Cliente entity){
+    public void updateById(Integer id, Cliente entity) {
         Cliente obj = repository.getOne(id);
         updateData(obj, entity);
         repository.save(obj);
     }
 
 
-    public void updateData(Cliente obj, Cliente entity){
+    public void updateData(Cliente obj, Cliente entity) {
         obj.setNome(entity.getNome());
         obj.setCpf(entity.getCpf());
+        obj.setCpf(obj.getCpf().replaceAll("[^0-9]+", ""));
         obj.setDataCadastro(new Date());
     }
 
-    public Boolean existCpf(Cliente obj){
+    public Boolean existCpf(Cliente obj) {
         List<Cliente> novaLista = findAll();
-        boolean exist = novaLista.stream().map(Cliente::getCpf).anyMatch(y-> y.equals(obj.getCpf()));
+        boolean exist = novaLista.stream().map(Cliente::getCpf).anyMatch(y -> y.equals(obj.getCpf()));
+        return exist;
+    }
+
+    public Boolean existCpfById(String cpf){
+        List<Cliente> novaLista = findAll();
+        boolean exist = novaLista.stream().map(Cliente::getCpf).anyMatch(y -> y.equals(cpf));
         return exist;
     }
 

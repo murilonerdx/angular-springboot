@@ -4,6 +4,10 @@ import {Cliente} from '../clientes'
 import {ClientesService} from '../../clientes.service'
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import {enableProdMode} from '@angular/core';
+
+
+enableProdMode();
 
 @Component({
   selector: 'app-clientes-form',

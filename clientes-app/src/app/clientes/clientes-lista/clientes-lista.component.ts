@@ -9,8 +9,10 @@ import {Router} from '@angular/router'
   styleUrls: ['./clientes-lista.component.css']
 })
 export class ClientesListaComponent implements OnInit {
-  clienteSelecionado: Cliente | undefined;
+  clienteSelecionado!: Cliente;
   clientes: Cliente[] | undefined | null;
+  mensagemSucesso: String | undefined | null;
+  mensagemErro: String | undefined | null;
   constructor(private service: ClientesService, private router :Router) {
 
    }
@@ -29,6 +31,9 @@ export class ClientesListaComponent implements OnInit {
     this.clienteSelecionado = cliente;
   }
 
+  deletarCliente(){
+    this.service.deletar(this.clienteSelecionado).subscribe(response=>{this.mensagemSucesso ='Cliente deletado com sucesso', this.ngOnInit()}, erro => this.mensagemErro = 'Ocorreu um erro ao deletar o cliente')
+  }
   
 
 }

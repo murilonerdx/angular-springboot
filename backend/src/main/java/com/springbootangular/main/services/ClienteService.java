@@ -1,20 +1,15 @@
 package com.springbootangular.main.services;
 
-import com.springbootangular.main.model.Cliente;
-import com.springbootangular.main.repository.ClienteRepository;
-import com.springbootangular.main.services.exceptions.ResourceNotFoundException;
+import com.springbootangular.main.model.entity.Cliente;
+import com.springbootangular.main.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {

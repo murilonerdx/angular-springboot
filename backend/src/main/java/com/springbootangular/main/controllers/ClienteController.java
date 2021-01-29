@@ -1,7 +1,6 @@
 package com.springbootangular.main.controllers;
 
-import com.springbootangular.main.model.Cliente;
-import com.springbootangular.main.repository.ClienteRepository;
+import com.springbootangular.main.model.entity.Cliente;
 import com.springbootangular.main.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

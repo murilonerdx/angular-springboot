@@ -19,7 +19,6 @@ import java.util.List;
 @RestController
 @Controller
 @RequestMapping(value="/api/servicos-prestados")
-@CrossOrigin("*")
 public class ServicoPrestadoController {
 
     private final BigDecimalConverter bigDecimalConverter;

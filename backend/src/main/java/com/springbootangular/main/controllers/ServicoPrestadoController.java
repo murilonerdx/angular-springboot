@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @Controller
 @RequestMapping(value="/api/servicos-prestados")
+@CrossOrigin("*")
 public class ServicoPrestadoController {
 
     private final BigDecimalConverter bigDecimalConverter;
@@ -38,7 +39,8 @@ public class ServicoPrestadoController {
 
     @PostMapping()
     public ServicoPrestado salvar(@RequestBody ServicoPrestadoDTO dto){
-        LocalDate data = LocalDate.now();LocalDate.parse(dto.getData(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate data = LocalDate.now();
+        LocalDate.parse(dto.getData(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Integer idCliente = dto.getIdCliente();
 
         Cliente cliente = clienteRepository

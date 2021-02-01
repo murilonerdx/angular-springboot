@@ -5,7 +5,7 @@
     </ol>
     <form #form="ngForm">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="">Cliente: </label>
                     <select name="" class="form-control" [ngModelOptions] = "{standalone: true}" [(ngModel)]="servico.idCliente">
@@ -16,17 +16,34 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label type="text">Descrição:</label>
-                        <input type="text" class="form-control" [(ngModel)]="servico.descricao" name="descricao" id="inputDescricao">
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label type="text">Descrição:</label>
+                    <input type="text" class="form-control" [(ngModel)]="servico.descricao" name="descricao" id="inputDescricao">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3"><button (click) = "onSubmit()" type="submit" class="btn btn-success">Salvar</button></div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label type="text">Data:</label>
+                    <input type="text" class="form-control" [(ngModel)]="servico.data" name="data" id="inputData">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label type="text">Preço:</label>
+                    <input type="text" class="form-control" [(ngModel)]="servico.preco" name="descricao" id="inputPreco">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><button (click) = "onSubmit()" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button></div>
         </div>
     </form>
     </div>

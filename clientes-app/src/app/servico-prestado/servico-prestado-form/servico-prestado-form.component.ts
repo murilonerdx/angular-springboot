@@ -14,6 +14,8 @@ export class ServicoPrestadoFormComponent implements OnInit {
 
   clientes: Cliente[] = []
   servico: ServicoPrestado
+  success: boolean = false;
+  errors!: String[] | null;
 
   constructor(private clienteService: ClientesService, private servicoPrestadoService: ServicoPrestadoService) {
     this.servico = new ServicoPrestado();
@@ -24,7 +26,13 @@ export class ServicoPrestadoFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.servicoPrestadoService.salvar(this.servico).subscribe(response => this.servico = response)
+    this.servicoPrestadoService.salvar(this.servico).subscribe(response => {
+     this.success = true;
+     this.errors = null;
+     this.servico = new ServicoPrestado();
+    },errorResponse => {
+      this.errors = ['Erro ao salvar o cliente.']
+    })
   }
 
 }

@@ -30,9 +30,7 @@ export class ServicoPrestadoFormComponent implements OnInit {
      this.success = true;
      this.errors = null;
      this.servico = new ServicoPrestado();
-    },errorResponse => {
-      this.errors = ['Erro ao salvar o cliente.']
-    })
+    }, errorResponse => this.errors = errorResponse.error.erros)
   }
 
 }

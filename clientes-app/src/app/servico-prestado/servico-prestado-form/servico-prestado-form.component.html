@@ -1,62 +1,82 @@
-<div  class="container">
-    <h1 class="mt-4">Servicos</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrum-bitem active">Servicos Prestados</li>
-    </ol>
-    
-    <form #form="ngForm">
+
+<div class="container">
+    <h1 class="mt-4">Serviço Prestado</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrum-bitem active">Novo</li>
+</ol>
+    <form #form="ngForm" (submit)="onSubmit()" >
 
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-success" role="alert" *ngIf="success == true">
-                    Serviço Prestado salvo com sucesso!.
-                  </div>
-                  <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
-                    {{erro}}
-                  </div>
+                    Serviço Prestado salvo com sucesso!    
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                    {{ erro  }}    
+                </div>
             </div>
         </div>
-
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="">Cliente: </label>
-                    <select name="" class="form-control" [ngModelOptions] = "{standalone: true}" [(ngModel)]="servico.idCliente">
+                    <label>Cliente: </label>
+                    <select class="form-control" 
+                            [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="servico.idCliente">
                         <option value="">Selecione...</option>
-                        <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
-                            {{cliente.nome}}
+                        <option *ngFor="let cliente of clientes" 
+                                [ngValue]="cliente.id">
+                            {{ cliente.nome }}
                         </option>
                     </select>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label type="text">Descrição:</label>
-                    <input type="text" class="form-control" [(ngModel)]="servico.descricao" name="descricao" id="inputDescricao">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label type="text">Data:</label>
-                    <input type="text" class="form-control" [(ngModel)]="servico.data" name="data" id="inputData">
+                    <label>Descrição:</label>
+                    <input class="form-control" 
+                            [(ngModel)]="servico.descricao" type="text" 
+                            name="descricao" id="inputDescricao">
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label type="text">Preço:</label>
-                    <input type="text" class="form-control" [(ngModel)]="servico.preco" name="descricao" id="inputPreco">
+                    <label>Data:</label>
+                    <input class="form-control" 
+                            [(ngModel)]="servico.data" type="text" 
+                            name="data" id="inputData">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Preço:</label>
+                    <input class="form-control" 
+                            [(ngModel)]="servico.preco" type="text" 
+                            name="preco" id="inputPreco">
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-3"><button (click) = "onSubmit()" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button></div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i>
+                    Salvar
+                </button>
+
+                <button type="button" routerLink="/servicos-prestados/lista" 
+                        class="btn btn-danger ml-1" >
+                    <i class="fa fa-arrow-alt-circle-left" ></i> Voltar
+                </button>
+            </div>
         </div>
+
     </form>
-    </div>
+</div>

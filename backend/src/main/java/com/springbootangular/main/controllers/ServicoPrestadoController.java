@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,7 +38,7 @@ public class ServicoPrestadoController {
     }
 
     @PostMapping()
-    public ServicoPrestado salvar(@RequestBody ServicoPrestadoDTO dto){
+    public ServicoPrestado salvar(@RequestBody @Valid ServicoPrestadoDTO dto){
         LocalDate data = LocalDate.now();
         LocalDate.parse(dto.getData(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Integer idCliente = dto.getIdCliente();
@@ -61,4 +62,6 @@ public class ServicoPrestadoController {
     ){
         return servicoPrestadoRepository.findByNomeClienteAndMes("%" + nome + "%", mes);
     }
+
+
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientesService } from 'src/app/clientes.service';
-import { Cliente } from '../clientes';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
+
+import { Cliente } from '../cliente';
+import { ClientesService } from '../../clientes.service'
 
 @Component({
   selector: 'app-clientes-lista',
@@ -9,31 +10,39 @@ import {Router} from '@angular/router'
   styleUrls: ['./clientes-lista.component.css']
 })
 export class ClientesListaComponent implements OnInit {
-  clienteSelecionado!: Cliente;
-  clientes: Cliente[] | undefined | null;
-  mensagemSucesso: String | undefined | null;
-  mensagemErro: String | undefined | null;
-  constructor(private service: ClientesService, private router :Router) {
 
-   }
+  clientes: Cliente[] = [];
+  clienteSelecionado: Cliente;
+  mensagemSucesso: string;
+  mensagemErro: string;
+
+  constructor(
+    private service: ClientesService, 
+    private router: Router) {}
 
   ngOnInit(): void {
     this.service
-    .getClientes()
-    .subscribe(response => this.clientes = response);
+      .getClientes()
+      .subscribe( resposta => this.clientes = resposta );
   }
 
   novoCadastro(){
-    this.router.navigate(['/clientes-form'])
+    this.router.navigate(['/clientes/form'])
   }
 
-  preparaDelecao(cliente : Cliente){
+  preparaDelecao(cliente: Cliente){
     this.clienteSelecionado = cliente;
   }
 
   deletarCliente(){
-    this.service.deletar(this.clienteSelecionado).subscribe(response=>{this.mensagemSucesso ='Cliente deletado com sucesso', this.ngOnInit()}, erro => this.mensagemErro = 'Ocorreu um erro ao deletar o cliente')
+    this.service
+      .deletar(this.clienteSelecionado)
+      .subscribe( 
+        response => {
+          this.mensagemSucesso = 'Cliente deletado com sucesso!'
+          this.ngOnInit();
+        },
+        erro => this.mensagemErro = 'Ocorreu um erro ao deletar o cliente.'  
+      )
   }
-  
-
 }

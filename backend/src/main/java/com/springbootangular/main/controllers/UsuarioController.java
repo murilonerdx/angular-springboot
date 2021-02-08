@@ -2,12 +2,13 @@ package com.springbootangular.main.controllers;
 
 import com.springbootangular.main.model.entity.Usuario;
 import com.springbootangular.main.model.repository.UsuarioRepository;
+import com.springbootangular.main.services.UsuarioService;
+import com.springbootangular.main.services.exceptions.UsuarioCadastradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -18,10 +19,15 @@ import javax.validation.Valid;
 public class UsuarioController {
 
     @Autowired
-    private final UsuarioRepository repository;
+    private final UsuarioService service;
 
-    @PostMapping()
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody @Valid Usuario usuario){
-        repository.save(usuario);
+        try{
+            service.salvar(usuario);
+        }catch (UsuarioCadastradoException e){
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, e.getMessage() );
+        }
     }
 }
